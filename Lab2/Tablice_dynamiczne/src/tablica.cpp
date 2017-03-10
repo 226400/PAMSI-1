@@ -13,6 +13,11 @@ Tablica::Tablica() {
 
 }
 
+Tablica::~Tablica() {
+  delete [] _Tablica;
+
+}
+
 
 Tablica::Tablica(int rozmiar) {
 
