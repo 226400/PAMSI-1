@@ -1,0 +1,24 @@
+#include <iostream>
+
+using namspace std;
+
+int Potega(int x, int p) {
+  if(p==0)
+    return 1;
+  else if(p==1)
+    return x;
+  else {
+    --p;
+    return Potega(x,p);
+  }
+}
+
+int main() {
+  int x, p;
+  cout << "\nPodaj podstawe: ";
+  cin >> x;
+  cout << "\nPodaj wykladnik: ";
+  cin >> p;
+  cout << endl << x << " ^ " << p << " = " << Potega(x,p) << endl;
+  return 0;
+}
