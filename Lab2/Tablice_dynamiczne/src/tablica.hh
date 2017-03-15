@@ -2,10 +2,9 @@
 class Tablica {
   
   int _rozmiar;
-  int _buforrozmiar;
   int _wypelnienie;
   int*  _Tablica;
-  int* _buforTablica;
+  void powieksz(int);
   
 public:
   Tablica();

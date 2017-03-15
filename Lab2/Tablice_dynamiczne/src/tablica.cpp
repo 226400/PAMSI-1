@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstdio>
 #include "tablica.hh"
+#define TRYB 0  //powiekszanie o 1
+//#define TRYB 1  //powiekszanie x2
 
 using namespace std;
 
@@ -16,9 +18,6 @@ Tablica::Tablica() {
 
 Tablica::~Tablica() {
   delete [] _Tablica;
-  delete [] _buforTablica;
-  cout << "\nUsuwam tablice. " << endl;
-
 }
 
 
@@ -35,13 +34,12 @@ Tablica::Tablica(int rozmiar) {
 
 void Tablica::przypisz(int pozycja, int wartosc, int &blad) {
 
+  if(_wypelnienie==_rozmiar)
+    powieksz(TRYB);  
   if(_wypelnienie<_rozmiar) {
     _Tablica[pozycja] = wartosc;
     _wypelnienie++;
   }
-  
-  if(_wypelnienie==_rozmiar)
-    blad = 1;
   
 }
 
@@ -56,6 +54,33 @@ void Tablica::odczytaj(int pozycja, int &wartosc) {
 void Tablica::pokaz_rozmiar(int &rozmiar) {
 
   rozmiar = _rozmiar;
+
+}
+
+void Tablica::powieksz(int tryb) {
+
+  if(tryb) {
+    int* bufor = new int[2*_rozmiar];
+
+    for(int i=0; i<_rozmiar; i++) {
+      bufor[i] = _Tablica[i];
+    }
+    _rozmiar = 2*_rozmiar;
+    delete [] _Tablica;
+    _Tablica = &bufor[0];
+  }
+
+  else {
+    int* bufor = new int[_rozmiar +1];
+
+    for (int i=0; i<_rozmiar; i++) {
+      bufor[i] = _Tablica[i];
+    }
+    _rozmiar++;
+    delete [] _Tablica;
+    _Tablica = &bufor[0];
+  }
+   
 
 }
 
