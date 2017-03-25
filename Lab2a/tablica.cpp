@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cstdio>
 #include "tablica.hh"
-//#define TRYB 0  //powiekszanie o 1
-#define TRYB 1  //powiekszanie x2
+#define TRYB 0  //powiekszanie o 1
+//#define TRYB 1  //powiekszanie x2
 
 using namespace std;
 
@@ -37,7 +37,7 @@ Tablica::Tablica(int rozmiar) {
 }
 
 
-void Tablica::przypisz(int pozycja, int wartosc, int &blad) {
+void Tablica::przypisz(int pozycja, int wartosc) {
 
   if(_wypelnienie==_rozmiar)
     powieksz(TRYB);  
@@ -49,13 +49,13 @@ void Tablica::przypisz(int pozycja, int wartosc, int &blad) {
 }
 
 
-void Tablica::odczytaj(int pozycja, int &wartosc) {
-  wartosc = _Tablica[pozycja];
+int Tablica::odczytaj(int pozycja) {
+  return _Tablica[pozycja];
 }
 
 
-void Tablica::pokaz_rozmiar(int &rozmiar) {
-  rozmiar = _rozmiar;
+int Tablica::pokaz_rozmiar() {
+  return _rozmiar;
 }
 
 void Tablica::powieksz(int tryb) {
@@ -68,7 +68,7 @@ void Tablica::powieksz(int tryb) {
     }
     
     _rozmiar = 2*_rozmiar;
-    delete [] _Tablica;
+    //delete [] _Tablica;
     _Tablica = &bufor[0];
   }
 
@@ -80,7 +80,7 @@ void Tablica::powieksz(int tryb) {
     }
     
     _rozmiar++;
-    delete [] _Tablica;
+    //delete [] _Tablica;
     _Tablica = &bufor[0];
   }
    
@@ -93,16 +93,17 @@ void Tablica::powieksz(int tryb) {
 void Tablica::wykonajObliczenia(int rozmiar) {
 
   for(int i=0; i<rozmiar; i++) {
-    przypisz(i, 1, _blad);
+    przypisz(i, 1);
   }
   
 }
 
 void Tablica::resetuj(int rozmiar) {
 
-  delete [] _Tablica;
+  //delete [] _Tablica;
+  int *bufor = new int[rozmiar];
   _rozmiar = rozmiar;
-  _Tablica = new int[_rozmiar];
+  _Tablica = &bufor[0];
   
   for (int i=0; i<rozmiar; i++) {
     _Tablica[i] = 0;

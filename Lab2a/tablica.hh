@@ -12,11 +12,11 @@ public:
   Tablica();
   Tablica(int);
   ~Tablica();
-  void przypisz(int, int, int&);
-  void odczytaj(int, int&);
-  void pokaz_rozmiar(int&);
-  void wykonajObliczenia(int);
-  void resetuj(int);
+  void przypisz(int, int);
+  int odczytaj(int);
+  int pokaz_rozmiar();
+  virtual void wykonajObliczenia(int);
+  virtual void resetuj(int);
 
 };
   
