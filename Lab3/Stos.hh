@@ -1,12 +1,15 @@
-
-class Stos : public Kontener {
+#include "iMierzalny.hh"
+#include "iKontener.hh"
+class Stos : public Kontener, public Mierzalny {
   
 public:
-  virtual void add(Element);
-  virtual Element get();
-  virtual int size();
-  virtual Element* find(Element);
+  void add(Element);
+  Element get();
+  int size();
+  Element* find(Element);
   Element top();
+  void wykonajObliczenia(int);
+  void resetuj();
   
 };
 
