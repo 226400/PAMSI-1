@@ -28,6 +28,7 @@ int podziel(Tablica &tablica, int poczatek, int koniec) {
     else
       return j;
   }
+  
 }
 
 void quicksort(Tablica &tablica, int poczatek, int koniec) {
