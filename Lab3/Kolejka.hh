@@ -1,13 +1,16 @@
+#include "iMierzalny.hh"
+#include "iKontener.hh"
 
-class Kolejka : public Kontener {
+class Kolejka : public Kontener, public Mierzalny {
   
 public:
-  virtual void add(Element);
-  virtual Element get();
-  virtual int size();
-  virtual *Element find(Element);
+  void add(Element);
+  Element get();
+  int size();
+  Element* find(Element);
   Element end();
-  
+  void wykonajObliczenia(int);
+  void resetuj();
 };
 
 /*
@@ -48,7 +51,7 @@ int Kolejka::size() {
   [OUT]:
   element1 - wskaźnik na znaleziony element
  */
-*Element Kolejka::find(Element element) {
+Element* Kolejka::find(Element element) {
   return element1;
 }
 
