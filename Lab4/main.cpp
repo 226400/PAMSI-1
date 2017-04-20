@@ -80,6 +80,50 @@ void quicksort_odwrotnie(Tablica &tablica, int poczatek, int koniec) {
   }
 }
 
+
+
+
+
+
+//MUSZE JESZCZE U KOLEGI PRZECIAZYC OPERATORY I PODZIALA
+
+
+void merge(Tablica &tablica, int poczatek, int sr, int koniec)
+{
+    int tab[ROZMIAR];
+    int t[ROZMIAR];
+int j,q;
+int i=0;
+for (i=poczatek; i<=koniec; i++) t[i]=tab[i];  // Skopiowanie danych do tablicy pomocniczej
+i=poczatek; j=sr+1; q=poczatek;                 // Ustawienie wskaźników tablic
+while (i<=sr && j<=koniec) {         // Przenoszenie danych z sortowaniem ze zbiorów pomocniczych do tablicy głównej
+if (t[i]<t[j])
+tab[q++]=t[i++];
+else
+tab[q++]=t[j++];
+}
+while (i<=sr) tab[q++]=t[i++]; // Przeniesienie nie skopiowanych danych ze zbioru pierwszego w przypadku, gdy drugi zbiór się skończył
+}
+
+
+void mergesort(int poczatek, int koniec)
+{
+int sr;
+if (poczatek<koniec) {
+sr=(poczatek+koniec)/2;
+mergesort(poczatek, sr);    // Dzielenie lewej części
+mergesort(sr+1, koniec);   // Dzielenie prawej części
+merge(poczatek, sr, koniec);   // Łączenie części lewej i prawej
+}
+}
+
+
+
+
+
+
+
+
 int main() {
   Stoper stoper;
   srand (time(NULL));
@@ -95,4 +139,13 @@ int main() {
   quicksort(tablica, 0, ROZMIAR-1);
   stoper.stop();
   cout << "\nCzas obliczen: " << stoper.czas() <<"\n\n\n";
+
+
+  mergesort(0,ROZMIAR-1);
+
+   //cout<<"Zbior po sortowaniu"<<endl;
+  for (int i=0; i<ROZMIAR; i++)
+    //cout<<tab[i]<<endl;;
+
+
 }
