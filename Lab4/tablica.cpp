@@ -7,13 +7,14 @@
 using namespace std;
 
 
+
 Tablica::Tablica() {
-  
+
    _rozmiar = 1;
   _wypelnienie = 0;
   _Tablica = new int[_rozmiar];
   _Tablica[0] = 0;
-  
+
 }
 
 
@@ -27,28 +28,39 @@ Tablica::~Tablica() {
 Tablica::Tablica(int rozmiar) {
   _rozmiar = rozmiar;
   _Tablica = new int[_rozmiar];
-  
+
   for (int i=0; i<rozmiar; i++) {
     _Tablica[i] = 0;
   }
   _wypelnienie = 0;
-  
+
 }
+
+
 
 
 void Tablica::przypisz(int pozycja, int wartosc) {
 
   if(_wypelnienie==_rozmiar)
-    powieksz(TRYB);  
+    powieksz(TRYB);
   if(_wypelnienie<_rozmiar) {
     _Tablica[pozycja] = wartosc;
     _wypelnienie++;
   }
-  
+
 }
 
+int& Tablica::operator [] (int pozycja) {
+	return _Tablica[pozycja];
+}
+
+int Tablica::operator [] (int pozycja) const {
+	return _Tablica[pozycja];
+}
+
+
 void Tablica::przypisz1(int pozycja, int wartosc) {
-    _Tablica[pozycja] = wartosc; 
+    _Tablica[pozycja] = wartosc;
 }
 
 
@@ -72,7 +84,7 @@ void Tablica::powieksz(int tryb) {
     for(int i=0; i<_rozmiar; i++) {
       bufor[i] = _Tablica[i];
     }
-    
+
     _rozmiar = 2*_rozmiar;
     delete [] _Tablica;
     _Tablica = &bufor[0];
@@ -84,14 +96,11 @@ void Tablica::powieksz(int tryb) {
     for (int i=0; i<_rozmiar; i++) {
       bufor[i] = _Tablica[i];
     }
-    
+
     _rozmiar++;
     delete [] _Tablica;
     _Tablica = &bufor[0];
   }
-   
+
 
 }
-
-    
-  

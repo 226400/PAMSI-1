@@ -4,8 +4,8 @@
 #include <cstdlib>
 #include "tablica.hh"
 #include "stoper.hh"
-#define ROZMIAR 1000
-#define MAX 1000000
+#define ROZMIAR 100000
+#define MAX 100000000
 
 using namespace std;
 
@@ -33,7 +33,7 @@ int podziel(Tablica &tablica, int poczatek, int koniec) {
     else
       return j;
   }
-  
+
 }
 
 int podziel_odwrotnie(Tablica &tablica, int poczatek, int koniec) {
@@ -59,7 +59,7 @@ int podziel_odwrotnie(Tablica &tablica, int poczatek, int koniec) {
     else
       return j;
   }
-  
+
 }
 
 void quicksort(Tablica &tablica, int poczatek, int koniec) {
@@ -81,50 +81,38 @@ void quicksort_odwrotnie(Tablica &tablica, int poczatek, int koniec) {
 }
 
 
-
-
-
-
-//MUSZE JESZCZE U KOLEGI PRZECIAZYC OPERATORY I PODZIALA
-
-
 void merge(Tablica &tablica, int poczatek, int sr, int koniec)
 {
-    int tab[ROZMIAR];
     int t[ROZMIAR];
 int j,q;
 int i=0;
-for (i=poczatek; i<=koniec; i++) t[i]=tab[i];  // Skopiowanie danych do tablicy pomocniczej
+for (i=poczatek; i<=koniec; i++) t[i]=tablica[i];  // Skopiowanie danych do tablicy pomocniczej
 i=poczatek; j=sr+1; q=poczatek;                 // Ustawienie wskaźników tablic
 while (i<=sr && j<=koniec) {         // Przenoszenie danych z sortowaniem ze zbiorów pomocniczych do tablicy głównej
 if (t[i]<t[j])
-tab[q++]=t[i++];
+tablica[q++]=t[i++];
 else
-tab[q++]=t[j++];
+tablica[q++]=t[j++];
 }
-while (i<=sr) tab[q++]=t[i++]; // Przeniesienie nie skopiowanych danych ze zbioru pierwszego w przypadku, gdy drugi zbiór się skończył
+while (i<=sr) tablica[q++]=t[i++]; // Przeniesienie nie skopiowanych danych ze zbioru pierwszego w przypadku, gdy drugi zbiór się skończył
 }
 
 
-void mergesort(int poczatek, int koniec)
+void mergesort(Tablica &tablica, int poczatek, int koniec)
 {
 int sr;
 if (poczatek<koniec) {
 sr=(poczatek+koniec)/2;
-mergesort(poczatek, sr);    // Dzielenie lewej części
-mergesort(sr+1, koniec);   // Dzielenie prawej części
-merge(poczatek, sr, koniec);   // Łączenie części lewej i prawej
+//sr=koniec-1;
+mergesort(tablica,poczatek, sr);    // Dzielenie lewej części
+mergesort(tablica, sr+1, koniec);   // Dzielenie prawej części
+merge(tablica,poczatek, sr, koniec);   // Łączenie części lewej i prawej
 }
 }
-
-
-
-
-
-
-
 
 int main() {
+  for(int i=0;i<10;i++)
+  {
   Stoper stoper;
   srand (time(NULL));
   Tablica tablica(1);
@@ -134,18 +122,14 @@ int main() {
     tablica.przypisz(i,wartosc);
   }
   //quicksort_odwrotnie(tablica, 0, ROZMIAR-1);
-  cout << "\n\nQUICKSORT: \n";
-  stoper.start();
-  quicksort(tablica, 0, ROZMIAR-1);
+//  cout << "\n\nQUICKSORT: \n";
+
+//  quicksort(tablica, 0, ROZMIAR-1);
+
+ stoper.start();
+ mergesort(tablica, 0,ROZMIAR-1);
   stoper.stop();
-  cout << "\nCzas obliczen: " << stoper.czas() <<"\n\n\n";
-
-
-  mergesort(0,ROZMIAR-1);
-
-   //cout<<"Zbior po sortowaniu"<<endl;
-  for (int i=0; i<ROZMIAR; i++)
-    //cout<<tab[i]<<endl;;
-
-
+//  cout << "\nCzas obliczen: " << stoper.czas() <<"\n\n\n";
+cout<<stoper.czas()<<endl;
+}
 }
